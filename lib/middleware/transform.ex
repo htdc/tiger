@@ -20,6 +20,12 @@ defmodule Tiger.Middleware.Transform do
     {:error, to_struct(env)}
   end
 
+
+  defp to_struct(%Env{body: %{object: "charge"} = charge} = env) do
+    struct(Charge, charge)
+    |> replace_body(env)
+  end
+
   defp to_struct(any), do: any
 
   defp replace_body(struct, env) do
