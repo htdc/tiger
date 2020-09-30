@@ -1,2 +1,0 @@
-defmodule Tiger do
-end
