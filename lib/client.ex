@@ -38,11 +38,11 @@ defmodule Tiger.Client do
       Tesla.Middleware.Query,
       {Tesla.Middleware.BasicAuth, [username: config.api_key]},
       {Tesla.Middleware.BaseUrl, url},
-      Stripe.Middleware.Transform,
+      Tiger.Middleware.Transform,
       Tesla.Middleware.KeepRequest,
       Tesla.Middleware.Compression,
       Tesla.Middleware.Logger,
-      {Tesla.Middleware.JSON, [engine_opts: [Config: :atoms]]}
+      {Tesla.Middleware.JSON, [engine_opts: [keys: :atoms]]}
     ]
 
     Tesla.client(middleware, adapter)

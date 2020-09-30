@@ -1,8 +1,8 @@
-defmodule Stripe.Middleware.Transform do
+defmodule Tiger.Middleware.Transform do
   @moduledoc false
   alias Tesla.Env
-  # alias Spreedly.Structs.{Gateway, PaymentMethod, Response, Transaction}
-  # import Spreedly.Middleware.TransformMacro
+  alias Tiger.Structs.{Charge}
+  # import Tiger.Middleware.TransformMacro
   @behaviour Tesla.Middleware
 
   def call(%Env{} = env, next, _options) do
