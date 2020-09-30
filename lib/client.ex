@@ -1,14 +1,38 @@
 defmodule Tiger.Client do
+  @moduledoc """
+  Used for building a Tesla client for use with the Stripe API
+  """
   alias Tiger.Config
 
-  def new(%Config{} = secrets) do
-    new(secrets, default_url(), default_adapter())
+  @doc """
+  Create a new `Tesla.Client`
+
+  ## Parameters
+  - `config` is [`%Config{}`](`Tiger.Config`) struct
+  """
+  def new(%Config{} = config) do
+    new(config, default_url(), default_adapter())
   end
 
-  def new(%Config{} = secrets, url) do
-    new(secrets, url, default_adapter())
+  @doc """
+  Create a new `Tesla.Client`
+
+  ## Parameters
+  - `secrets` is [`%Config{}`](`Tiger.Config`) struct
+  - `url` allows you to override the URL where requests will be sent.  Useful for testing
+  """
+  def new(%Config{} = config, url) do
+    new(config, url, default_adapter())
   end
 
+  @doc """
+  Create a new `Tesla.Client`
+
+  ## Parameters
+  - `secrets` is [`%Config{}`](`Tiger.Config`) struct
+  - `url` allows you to override the URL where requests will be sent.  Useful for testing
+  - `adapter` Allows you to use a different `Tesla.Adapter` to the default which is `Tesla.Adapter.Gun`
+  """
   def new(%Config{} = config, url, adapter) do
     middleware = [
       Tesla.Middleware.Query,
@@ -18,7 +42,7 @@ defmodule Tiger.Client do
       Tesla.Middleware.KeepRequest,
       Tesla.Middleware.Compression,
       Tesla.Middleware.Logger,
-      {Tesla.Middleware.JSON, [engine_opts: [keys: :atoms]]}
+      {Tesla.Middleware.JSON, [engine_opts: [Config: :atoms]]}
     ]
 
     Tesla.client(middleware, adapter)
