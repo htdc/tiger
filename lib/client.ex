@@ -42,7 +42,9 @@ defmodule Tiger.Client do
       Tesla.Middleware.KeepRequest,
       Tesla.Middleware.Compression,
       Tesla.Middleware.Logger,
-      {Tesla.Middleware.JSON, [engine_opts: [keys: :atoms]]}
+      {Tesla.Middleware.FormUrlencoded,
+       [encode: &Plug.Conn.Query.encode/1, decode: &Plug.Conn.Query.decode/1]},
+      {Tesla.Middleware.DecodeJson, [engine_opts: [keys: :atoms]]}
     ]
 
     Tesla.client(middleware, adapter)
