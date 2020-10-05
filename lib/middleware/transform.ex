@@ -20,6 +20,10 @@ defmodule Tiger.Middleware.Transform do
     {:error, to_struct(env)}
   end
 
+  defp to_struct(%Env{body: %{data: [%{object: "charge"} | _] = charges}} = env) do
+    Enum.map(charges, fn charge -> struct(Charge, charge) end)
+    |> replace_body(env)
+  end
 
   defp to_struct(%Env{body: %{object: "charge"} = charge} = env) do
     struct(Charge, charge)
