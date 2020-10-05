@@ -61,6 +61,6 @@ defmodule Tiger.Client do
   Default URL for communicating with Stripe
   """
   def default_url do
-    Application.get_env(:ex_spreedly, :url, "https://api.stripe.com")
+    Application.get_env(:ex_spreedly, :url, "https://api.stripe.com/v1")
   end
 end
