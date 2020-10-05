@@ -16,6 +16,10 @@ defmodule Tiger.Charge do
     Tesla.post(client, endpoint_path(), FormSafe.encode(params))
   end
 
+  def capture(%Client{} = client, id, params \\ nil) do
+    Tesla.post(client, "#{endpoint_path()}/#{id}/capture", FormSafe.encode(params))
+  end
+
   @doc """
   Retrieve a charge
   """

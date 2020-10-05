@@ -89,4 +89,15 @@ defmodule Tiger.ChargeTest do
       assert length(charges) == 100
     end
   end
+
+  test "Can capture a pre-auth charge" do
+    with_proxy("capture_charge.fixture") do
+      {:ok, %Tesla.Env{body: %Charge{} = charge}} =
+        Tiger.Charge.capture(client, "ch_1HYtDwClStGc5XwO8e1EAjzl")
+
+      assert charge.id == "ch_1HYtDwClStGc5XwO8e1EAjzl"
+      assert charge.id =~ ~r/ch_/
+      assert charge.captured
+    end
+  end
 end
