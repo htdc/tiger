@@ -1,7 +1,7 @@
 defmodule Tiger.Middleware.Transform do
   @moduledoc false
   alias Tesla.Env
-  alias Tiger.Structs.{Charge, Transfer}
+  alias Tiger.Structs.{Balance, Charge, Transfer}
   # import Tiger.Middleware.TransformMacro
   @behaviour Tesla.Middleware
 
@@ -18,6 +18,11 @@ defmodule Tiger.Middleware.Transform do
 
   defp transform(%Env{status: status} = env) when status in 400..599 do
     {:error, to_struct(env)}
+  end
+
+  defp to_struct(%Env{body: %{object: "balance"} = balance} = env) do
+    struct(Balance, balance)
+    |> replace_body(env)
   end
 
   defp to_struct(%Env{body: %{data: [%{object: "charge"} | _] = charges}} = env) do
