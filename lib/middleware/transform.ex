@@ -1,7 +1,7 @@
 defmodule Tiger.Middleware.Transform do
   @moduledoc false
   alias Tesla.Env
-  alias Tiger.Structs.{Balance, Charge, Transfer}
+  alias Tiger.Structs.{Balance, BalanceTransaction, Charge, Transfer}
   # import Tiger.Middleware.TransformMacro
   @behaviour Tesla.Middleware
 
@@ -25,6 +25,16 @@ defmodule Tiger.Middleware.Transform do
     |> replace_body(env)
   end
 
+  defp to_struct(%Env{body: %{object: "balance_transaction"} = balance_transaction} = env) do
+    struct(BalanceTransaction, balance_transaction)
+    |> replace_body(env)
+  end
+
+  defp to_struct(%Env{body: %{data: [%{object: "balance_transaction"} | _] = bt}} = env) do
+    Enum.map(bt, fn transaction -> struct(BalanceTransaction, transaction) end)
+    |> replace_body(env)
+  end
+
   defp to_struct(%Env{body: %{data: [%{object: "charge"} | _] = charges}} = env) do
     Enum.map(charges, fn charge -> struct(Charge, charge) end)
     |> replace_body(env)
@@ -39,7 +49,6 @@ defmodule Tiger.Middleware.Transform do
     Enum.map(transfers, fn transfer -> struct(Transfer, transfer) end)
     |> replace_body(env)
   end
-
 
   defp to_struct(%Env{body: %{object: "transfer"} = transfer} = env) do
     struct(Transfer, transfer)
