@@ -28,7 +28,7 @@ defmodule Tiger.MixProject do
       {:jason, "~> 1.2"},
       {:tesla, "~> 1.3.3"},
       {:gun, "~> 1.3.3"},
-      {:nug, "~> 0.4"}
+      {:nug, "~> 0.4", only: [:test]}
     ]
   end
 
