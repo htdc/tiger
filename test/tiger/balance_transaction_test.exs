@@ -33,8 +33,6 @@ defmodule Tiger.BalanceTransactionTest do
       {:ok, %Tesla.Env{body: balance_transactions}} =
         Tiger.BalanceTransaction.list(client, limit: 3)
 
-      [%BalanceTransaction{} = first | _] = balance_transactions
-
       assert length(balance_transactions) == 3
     end
   end
