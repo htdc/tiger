@@ -14,6 +14,16 @@ defmodule Tiger.Refund do
   end
 
   @doc """
+  Create a refund and reverse a Connect Transfer
+  """
+
+  def create_with_reversal(%Client{} = client, charge_id, params \\ %{})
+      when is_binary(charge_id) do
+    with_charge_id = Map.merge(%{charge: charge_id, reverse_transfer: true}, params)
+    Tesla.post(client, endpoint_path(), FormSafe.encode(with_charge_id))
+  end
+
+  @doc """
   Retrieve a refund
   """
   def get(%Client{} = client, charge_id) when is_binary(charge_id) do

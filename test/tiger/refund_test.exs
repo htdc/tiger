@@ -17,6 +17,17 @@ defmodule Tiger.RefundTest do
     end
   end
 
+
+  test "Can create a refund with reversal for Connect payments" do
+    with_proxy("create_refund_connect.fixture") do
+      {:ok, %Tesla.Env{body: %Refund{} = refund}} =
+        Tiger.Refund.create_with_reversal(client, "ch_1H8N2ZClStGc5XwOBaJR5QSx")
+
+      assert refund.id == "re_1HgnOSClStGc5XwOshGv17Ve"
+      assert refund.transfer_reversal == "trr_1HgnOTClStGc5XwObI6JnqnG"
+    end
+  end
+
   test "Can retrieve a refund" do
     with_proxy("get_refund.fixture") do
       {:ok, %Tesla.Env{body: %Refund{} = refund}} =
