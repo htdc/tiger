@@ -1,7 +1,7 @@
 defmodule Tiger.Middleware.Transform do
   @moduledoc false
   alias Tesla.Env
-  alias Tiger.Structs.{Balance, BalanceTransaction, Charge, Transfer, Refund, Payout}
+  alias Tiger.Structs.{Balance, BalanceTransaction, Charge, Transfer, Refund, Payout, Token}
   # import Tiger.Middleware.TransformMacro
   @behaviour Tesla.Middleware
 
@@ -62,6 +62,11 @@ defmodule Tiger.Middleware.Transform do
 
   defp to_struct(%Env{body: %{object: "refund"} = refund} = env) do
     struct(Refund, refund)
+    |> replace_body(env)
+  end
+
+  defp to_struct(%Env{body: %{object: "token"} = token} = env) do
+    struct(Token, token)
     |> replace_body(env)
   end
 
