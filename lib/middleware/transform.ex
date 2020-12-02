@@ -1,7 +1,18 @@
 defmodule Tiger.Middleware.Transform do
   @moduledoc false
   alias Tesla.Env
-  alias Tiger.Structs.{Balance, BalanceTransaction, Charge, Transfer, Refund, Payout, Token}
+
+  alias Tiger.Structs.{
+    Balance,
+    BalanceTransaction,
+    Charge,
+    Connect,
+    Transfer,
+    Refund,
+    Payout,
+    Token
+  }
+
   # import Tiger.Middleware.TransformMacro
   @behaviour Tesla.Middleware
 
@@ -77,6 +88,11 @@ defmodule Tiger.Middleware.Transform do
 
   defp to_struct(%Env{body: %{object: "transfer"} = transfer} = env) do
     struct(Transfer, transfer)
+    |> replace_body(env)
+  end
+
+  defp to_struct(%Env{body: %{token_type: "bearer"} = oauth_grant} = env) do
+    struct(Connect, oauth_grant)
     |> replace_body(env)
   end
 
