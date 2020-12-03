@@ -31,7 +31,7 @@ defmodule Tiger.BalanceTransactionTest do
   test "Can pass query params balance transactions" do
     with_proxy("list_balance_transactions_query.fixture") do
       {:ok, %Tesla.Env{body: balance_transactions}} =
-        Tiger.BalanceTransaction.list(client, limit: 3)
+        Tiger.BalanceTransaction.list(client, query: [limit: 3])
 
       assert length(balance_transactions) == 3
     end

@@ -27,8 +27,8 @@ defmodule Tiger.Charge do
     Tesla.get(client, "#{endpoint_path()}/#{id}")
   end
 
-  def get(%Client{} = client, id, params) when is_binary(id) and is_list(params) do
-    Tesla.get(client, "#{endpoint_path()}/#{id}", query: params)
+  def get(%Client{} = client, id, opts) when is_binary(id) and is_list(opts) do
+    Tesla.get(client, "#{endpoint_path()}/#{id}", opts)
   end
 
   @doc """
@@ -45,8 +45,8 @@ defmodule Tiger.Charge do
 
   Passed as a keyword list e.g. `[order: "desc"]`
   """
-  def list(%Client{} = client, query \\ []) do
-    Tesla.get(client, endpoint_path(), query: query)
+  def list(%Client{} = client, opts \\ []) do
+    Tesla.get(client, endpoint_path(), opts)
   end
 
   defp endpoint_path do

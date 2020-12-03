@@ -21,8 +21,8 @@ defmodule Tiger.Transfer do
   @doc """
   List transfers
   """
-  def list(%Client{} = client, query \\ []) do
-    Tesla.get(client, base_url(), query: query)
+  def list(%Client{} = client, opts \\ []) do
+    Tesla.get(client, base_url(), opts)
   end
 
   @doc """

@@ -40,7 +40,7 @@ defmodule Tiger.PayoutTest do
 
   test "Can list payouts with params" do
     with_proxy("list_payouts_with_params.fixture") do
-      {:ok, %Tesla.Env{body: payouts}} = Tiger.Payout.list(client, limit: 2)
+      {:ok, %Tesla.Env{body: payouts}} = Tiger.Payout.list(client, query: [limit: 2])
 
       [%Payout{} = first | _] = payouts
 

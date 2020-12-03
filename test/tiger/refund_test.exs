@@ -66,7 +66,7 @@ defmodule Tiger.RefundTest do
   test "Can list refunds with params" do
     with_proxy("list_refunds_with_params.fixture") do
       {:ok, %Tesla.Env{body: refunds}} =
-        Tiger.Refund.list(client, limit: 2)
+        Tiger.Refund.list(client, query: [limit: 2])
 
       assert length(refunds) == 2
     end

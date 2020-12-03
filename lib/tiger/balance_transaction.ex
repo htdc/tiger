@@ -17,8 +17,8 @@ defmodule Tiger.BalanceTransaction do
   @doc """
   Retrieve all balance transactions
   """
-  def list(%Client{} = client, query \\ []) do
-    Tesla.get(client, endpoint_path(), query: query)
+  def list(%Client{} = client, opts \\ []) do
+    Tesla.get(client, endpoint_path(), opts)
   end
 
   defp endpoint_path do

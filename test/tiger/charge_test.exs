@@ -66,7 +66,7 @@ defmodule Tiger.ChargeTest do
   test "Can retrieve a charge and expand" do
     with_proxy("get_charge-expand.fixture") do
       {:ok, %Tesla.Env{body: %Charge{} = charge}} =
-        Tiger.Charge.get(client, "ch_1HYr2GClStGc5XwOogX26olX", expand: ["transfer"])
+        Tiger.Charge.get(client, "ch_1HYr2GClStGc5XwOogX26olX", query: [expand: ["transfer"]])
 
       assert charge.id == "ch_1HYr2GClStGc5XwOogX26olX"
       assert charge.captured
@@ -95,7 +95,7 @@ defmodule Tiger.ChargeTest do
 
   test "Can retrieve a list of charges with query parameters" do
     with_proxy("list_charges_with_query.fixture") do
-      {:ok, %Tesla.Env{body: charges}} = Tiger.Charge.list(client, limit: 100)
+      {:ok, %Tesla.Env{body: charges}} = Tiger.Charge.list(client, query: [limit: 100])
 
       assert length(charges) == 100
     end

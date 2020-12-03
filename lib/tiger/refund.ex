@@ -33,8 +33,8 @@ defmodule Tiger.Refund do
   @doc """
   List refunds
   """
-  def list(%Client{} = client, query \\ []) do
-    Tesla.get(client, endpoint_path(), query: query)
+  def list(%Client{} = client, opts \\ []) do
+    Tesla.get(client, endpoint_path(), opts)
   end
 
   @doc """

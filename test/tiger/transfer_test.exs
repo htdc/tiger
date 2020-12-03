@@ -43,7 +43,7 @@ defmodule Tiger.TransferTest do
 
   test "Can retrieve a list of transfers with query parameters" do
     with_proxy("list_transfers_with_query.fixture") do
-      {:ok, %Tesla.Env{body: transfers}} = Tiger.Charge.list(client, limit: 20)
+      {:ok, %Tesla.Env{body: transfers}} = Tiger.Charge.list(client, query: [limit: 20])
 
       assert length(transfers) == 20
     end
