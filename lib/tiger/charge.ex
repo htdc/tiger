@@ -27,6 +27,10 @@ defmodule Tiger.Charge do
     Tesla.get(client, "#{endpoint_path()}/#{id}")
   end
 
+  def get(%Client{} = client, id, params) when is_binary(id) and is_list(params) do
+    Tesla.get(client, "#{endpoint_path()}/#{id}", query: params)
+  end
+
   @doc """
   Update a charge
   """

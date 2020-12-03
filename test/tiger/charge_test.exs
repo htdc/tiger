@@ -53,13 +53,24 @@ defmodule Tiger.ChargeTest do
     end
   end
 
-  test "Can make a retrieve a charge" do
+  test "Can retrieve a charge" do
     with_proxy("get_charge.fixture") do
       {:ok, %Tesla.Env{body: %Charge{} = charge}} =
         Tiger.Charge.get(client, "ch_1HYr2GClStGc5XwOogX26olX")
 
       assert charge.id == "ch_1HYr2GClStGc5XwOogX26olX"
       assert charge.captured
+    end
+  end
+
+  test "Can retrieve a charge and expand" do
+    with_proxy("get_charge-expand.fixture") do
+      {:ok, %Tesla.Env{body: %Charge{} = charge}} =
+        Tiger.Charge.get(client, "ch_1HYr2GClStGc5XwOogX26olX", expand: ["transfer"])
+
+      assert charge.id == "ch_1HYr2GClStGc5XwOogX26olX"
+      assert charge.captured
+      assert charge.transfer.destination_payment == "py_1HYr2GFFwAeTesFQ97LlDWPW"
     end
   end
 
