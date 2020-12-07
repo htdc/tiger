@@ -6,13 +6,25 @@ defmodule Tiger.MixProject do
       app: :tiger,
       version: "0.1.0",
       elixir: "~> 1.10",
+      description: "Elixir client for interacting with Stripe's API",
       start_permanent: Mix.env() == :prod,
       elixirc_paths: elixirc_paths(Mix.env()),
       deps: deps(),
+      package: package(),
       docs: [
         extras: ["README.md"],
         assets: "assets"
       ]
+    ]
+  end
+
+  def package do
+    [
+      licenses: ["MIT"],
+      maintainers: ["Martin Feckie"],
+      links: %{
+        Github: "https://github.com/htdc/tiger"
+      }
     ]
   end
 
