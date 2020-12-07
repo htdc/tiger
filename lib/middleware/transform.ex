@@ -13,7 +13,6 @@ defmodule Tiger.Middleware.Transform do
     Token
   }
 
-  # import Tiger.Middleware.TransformMacro
   @behaviour Tesla.Middleware
 
   def call(%Env{} = env, next, _options) do
