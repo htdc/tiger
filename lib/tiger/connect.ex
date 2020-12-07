@@ -4,8 +4,8 @@ defmodule Tiger.Connect do
   alias Tiger.Config
   alias Tesla.Client
 
-  def connect_client(%Config{} = config) do
-    Tiger.Client.new(config, endpoint_path())
+  def connect_client(%Config{} = config, url \\ endpoint_path()) do
+    Tiger.Client.new(config, url)
   end
 
   def oauth_token_callback(%Client{} = client, code) do
@@ -15,7 +15,7 @@ defmodule Tiger.Connect do
     })
   end
 
-  defp endpoint_path do
+  def endpoint_path do
     "https://connect.stripe.com"
   end
 end
