@@ -7,7 +7,7 @@ defmodule Tiger.BalanceTransaction do
   alias Tesla.Client
 
   @doc """
-  Retrieve a balance transaction
+  Retrieve a balance transaction.
   """
   def get(%Client{} = client, id) when is_binary(id) do
     Tesla.get(client, endpoint_path() <> "/#{id}")

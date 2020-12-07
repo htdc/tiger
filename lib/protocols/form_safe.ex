@@ -1,4 +1,5 @@
 defprotocol FormSafe do
+  @moduledoc false
   def encode(incoming)
 end
 
