@@ -8,7 +8,11 @@ defmodule Tiger.MixProject do
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       elixirc_paths: elixirc_paths(Mix.env()),
-      deps: deps()
+      deps: deps(),
+      docs: [
+        extras: ["README.md"],
+        assets: "assets"
+      ]
     ]
   end
 

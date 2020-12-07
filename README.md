@@ -1,3 +1,4 @@
+![Tiger](./assets/images/tiger.png)
 # Tiger
 
 Elixir client for interacting with Stripe
