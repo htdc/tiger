@@ -20,5 +20,4 @@ defmodule TestClient do
       api_key: System.get_env("STRIPE_TEST_API_KEY")
     }
   end
-
 end

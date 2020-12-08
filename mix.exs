@@ -4,7 +4,7 @@ defmodule Tiger.MixProject do
   def project do
     [
       app: :tiger,
-      version: "0.1.1",
+      version: "0.2.0",
       elixir: "~> 1.10",
       description: "Elixir client for interacting with Stripe's API",
       start_permanent: Mix.env() == :prod,
@@ -32,20 +32,24 @@ defmodule Tiger.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger, :castore, :gun, :idna]
     ]
   end
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:castore, "~> 0.1"},
+      {:certifi, "~> 2.0"},
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.22", only: :dev, runtime: false},
+      {:gun, "~> 1.3.3"},
       {:idna, "~> 6.0"},
       {:jason, "~> 1.2"},
-      {:tesla, "~> 1.3.3"},
-      {:gun, "~> 1.3.3"},
-      {:nug, "~> 0.4", only: [:test]}
+      {:nug, "~> 0.4", only: [:test]},
+      {:plug, "~> 1.0"},
+      {:ssl_verify_fun, "~> 1.0"},
+      {:tesla, "~> 1.3.3"}
     ]
   end
 

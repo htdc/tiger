@@ -54,7 +54,15 @@ defmodule Tiger.Client do
   Default adapter to be used for making requests.
   """
   def default_adapter do
-    Application.get_env(:ex_spreedly, :adapter, {Tesla.Adapter.Gun, [timeout: 30_000]})
+    Application.get_env(
+      :ex_spreedly,
+      :adapter,
+      {Tesla.Adapter.Gun,
+       [
+         timeout: 30_000,
+         certificates_verification: true
+       ]}
+    )
   end
 
   @doc """
