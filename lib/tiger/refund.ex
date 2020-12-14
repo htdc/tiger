@@ -26,8 +26,8 @@ defmodule Tiger.Refund do
   @doc """
   Retrieve a refund
   """
-  def get(%Client{} = client, charge_id) when is_binary(charge_id) do
-    Tesla.get(client, "#{endpoint_path()}/#{charge_id}")
+  def get(%Client{} = client, charge_id, opts \\ []) when is_binary(charge_id) do
+    Tesla.get(client, "#{endpoint_path()}/#{charge_id}", opts)
   end
 
   @doc """

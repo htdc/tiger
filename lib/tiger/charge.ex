@@ -23,11 +23,7 @@ defmodule Tiger.Charge do
   @doc """
   Retrieve a charge
   """
-  def get(%Client{} = client, id) when is_binary(id) do
-    Tesla.get(client, "#{endpoint_path()}/#{id}")
-  end
-
-  def get(%Client{} = client, id, opts) when is_binary(id) and is_list(opts) do
+  def get(%Client{} = client, id, opts \\ []) when is_binary(id) do
     Tesla.get(client, "#{endpoint_path()}/#{id}", opts)
   end
 
