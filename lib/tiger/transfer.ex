@@ -14,8 +14,8 @@ defmodule Tiger.Transfer do
   @doc """
   Retrieve a transfer
   """
-  def get(%Client{} = client, id) when is_binary(id) do
-    Tesla.get(client, "#{base_url()}/#{id}")
+  def get(%Client{} = client, id, opts \\ []) when is_binary(id) do
+    Tesla.get(client, "#{base_url()}/#{id}", opts)
   end
 
   @doc """
