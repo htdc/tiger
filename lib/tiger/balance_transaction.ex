@@ -9,10 +9,9 @@ defmodule Tiger.BalanceTransaction do
   @doc """
   Retrieve a balance transaction.
   """
-  def get(%Client{} = client, id) when is_binary(id) do
-    Tesla.get(client, endpoint_path() <> "/#{id}")
+  def get(%Client{} = client, id, opts \\ []) when is_binary(id) do
+    Tesla.get(client, endpoint_path() <> "/#{id}", opts)
   end
-
 
   @doc """
   Retrieve all balance transactions
