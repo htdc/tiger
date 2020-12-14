@@ -21,8 +21,9 @@ defmodule Tiger.Payout do
   @doc """
   Get a payout
   """
-  def get(%Client{} = client, payout_id) when is_binary(payout_id) do
-    Tesla.get(client, "#{endpoint_path()}/#{payout_id}")
+  def get(%Client{} = client, payout_id, opts \\ [])
+      when is_binary(payout_id) and is_list(opts) do
+    Tesla.get(client, "#{endpoint_path()}/#{payout_id}", opts)
   end
 
   @doc """
