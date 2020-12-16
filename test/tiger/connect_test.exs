@@ -10,9 +10,9 @@ defmodule Tiger.ConnectTest do
   test "Can connect account" do
     with_proxy("connect.fixture") do
       {:ok, %Tesla.Env{body: %Connect{} = body}} =
-        Tiger.Connect.oauth_token_callback(client, "ac_IUqXA35rPtA8xmREuOi5rMKJ6qIlteW0")
+        Tiger.Connect.oauth_token_callback(client, "ac_Ia8XDvk1MeP6Pgi0tEnmpdxP6HAY6YnW")
 
-      assert body.stripe_user_id == "acct_1HtqZmFVnuhDRM3U"
+      assert body.stripe_user_id == "acct_1HyyDgK4GJpnpSAF"
       assert body.token_type == "bearer"
       assert body.livemode == false
     end
