@@ -49,7 +49,7 @@ defmodule Tiger.MixProject do
       {:nug, "~> 0.4", only: [:test]},
       {:plug, "~> 1.0"},
       {:ssl_verify_fun, "~> 1.0"},
-      {:tesla, "~> 1.3.3"}
+      {:tesla, "~> 1.4.0"}
     ]
   end
 
