@@ -4,7 +4,7 @@ defmodule Tiger.MixProject do
   def project do
     [
       app: :tiger,
-      version: "0.2.0",
+      version: "0.2.1",
       elixir: "~> 1.10",
       description: "Elixir client for interacting with Stripe's API",
       start_permanent: Mix.env() == :prod,
