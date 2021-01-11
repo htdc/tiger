@@ -129,4 +129,23 @@ defmodule Tiger.AccountTest do
       assert account.id == "acct_1I8N3y2QNhSQq2g6"
     end
   end
+
+  test "List connected accounts" do
+    with_proxy("connect-list.fixture") do
+      {:ok, %Tesla.Env{body: accounts}} = Tiger.Account.list(client)
+
+      [%Account{} = first_account | _] = accounts
+
+      assert first_account.email == "a@b.com"
+      assert first_account.id == "acct_1I8N3y2QNhSQq2g6"
+    end
+  end
+
+  test "Delete connected account" do
+    with_proxy("connect-delete.fixture") do
+      {:ok, %Tesla.Env{body: %Account{} = account }} = Tiger.Account.delete(client, "acct_1I8N3y2QNhSQq2g6")
+
+      assert account.id == "acct_1I8N3y2QNhSQq2g6"
+    end
+  end
 end

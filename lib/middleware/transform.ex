@@ -101,6 +101,11 @@ defmodule Tiger.Middleware.Transform do
     |> replace_body(env)
   end
 
+  defp to_struct(%Env{body: %{data: [%{object: "account"} | _] = accounts}} = env) do
+    Enum.map(accounts, fn account -> struct(Account, account) end)
+    |> replace_body(env)
+  end
+
   defp to_struct(any), do: any
 
   defp replace_body(struct, env) do
