@@ -3,6 +3,7 @@ defmodule Tiger.Middleware.Transform do
   alias Tesla.Env
 
   alias Tiger.Structs.{
+    Account,
     Balance,
     BalanceTransaction,
     Charge,
@@ -92,6 +93,11 @@ defmodule Tiger.Middleware.Transform do
 
   defp to_struct(%Env{body: %{token_type: "bearer"} = oauth_grant} = env) do
     struct(Connect, oauth_grant)
+    |> replace_body(env)
+  end
+
+  defp to_struct(%Env{body: %{object: "account"} = account} = env) do
+    struct(Account, account)
     |> replace_body(env)
   end
 

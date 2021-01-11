@@ -48,4 +48,18 @@ defmodule Tiger.PayoutTest do
       assert length(payouts) == 2
     end
   end
+
+  test "Can list payouts for connect account" do
+    with_proxy("list_payouts_with_params.fixture") do
+      {:ok, %Tesla.Env{body: payouts}} = Tiger.Payout.list(client, headers: [{"stripe-account", ""}], query: [limit: 2, expand: []])
+
+      [%Payout{} = first | _] = payouts
+
+      assert first.id == "po_1HcKHuClStGc5XwOFm8IT0Qu"
+      assert length(payouts) == 2
+    end
+  end
+
+
+
 end
