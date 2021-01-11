@@ -126,7 +126,7 @@ defmodule Tiger.AccountTest do
         Tiger.Account.create(client, account_details)
 
       assert account.email == account_details.email
-      assert account.id == "acct_1I8N3y2QNhSQq2g6"
+      assert account.id == "acct_1I8NJH2RzhYwutv7"
     end
   end
 
