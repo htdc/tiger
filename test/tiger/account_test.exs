@@ -68,20 +68,21 @@ defmodule Tiger.AccountTest do
         company: %{
           address: %{
             line1: "address_full_match​",
-            city: "Melbourne",
-            state: "VIC",
-            postal_code: "3000"
+            city: "Washington",
+            state: "DC",
+            postal_code: "20001"
           }
         },
         individual: %{
           first_name: "Harry",
           last_name: "Potter",
-          phone: "+61433123123",
+          phone: "+12025550241",
+          id_number: "000000000",
           address: %{
             line1: "address_full_match​",
-            city: "Melbourne",
-            state: "VIC",
-            postal_code: "3000"
+            city: "Washington",
+            state: "DC",
+            postal_code: "20001"
           },
           email: "a@b.com",
           dob: %{
@@ -103,14 +104,14 @@ defmodule Tiger.AccountTest do
           date: DateTime.to_unix(DateTime.utc_now()),
           ip: "127.0.0.1"
         },
-        country: "AU",
+        country: "US",
         email: "a@b.com",
         external_account: %{
           object: "bank_account",
-          country: "AU",
-          currency: "AUD",
-          routing_number: "110000",
-          account_number: "000123456"
+          country: "US",
+          currency: "USD",
+          routing_number: "110000000",
+          account_number: "000123456789"
         },
         capabilities: %{
           card_payments: %{
@@ -126,7 +127,7 @@ defmodule Tiger.AccountTest do
         Tiger.Account.create(client, account_details)
 
       assert account.email == account_details.email
-      assert account.id == "acct_1I8NJH2RzhYwutv7"
+      assert account.id == "acct_1I8jdb2RbaoghtG3"
     end
   end
 
