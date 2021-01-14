@@ -71,7 +71,8 @@ defmodule Tiger.AccountTest do
             city: "Washington",
             state: "DC",
             postal_code: "20001"
-          }
+          },
+          tax_id: "000000000"
         },
         individual: %{
           first_name: "Harry",
@@ -79,7 +80,7 @@ defmodule Tiger.AccountTest do
           phone: "+12025550241",
           id_number: "000000000",
           address: %{
-            line1: "address_full_match​",
+            line1: "520 North Capitol St NW",
             city: "Washington",
             state: "DC",
             postal_code: "20001"
@@ -127,7 +128,7 @@ defmodule Tiger.AccountTest do
         Tiger.Account.create(client, account_details)
 
       assert account.email == account_details.email
-      assert account.id == "acct_1I8jdb2RbaoghtG3"
+      assert account.id =~ ~r/acct_/
     end
   end
 
