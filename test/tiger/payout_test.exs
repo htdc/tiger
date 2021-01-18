@@ -44,8 +44,20 @@ defmodule Tiger.PayoutTest do
 
       [%Payout{} = first | _] = payouts
 
-      assert first.id == "po_1HcKHuClStGc5XwOFm8IT0Qu"
+      assert first.id == "po_1HkKHxClStGc5XwO1WiqzTKE"
       assert length(payouts) == 2
+    end
+  end
+
+  test "Can list payouts for connect account" do
+    with_proxy("list_payouts_connect_with_params.fixture") do
+      {:ok, %Tesla.Env{body: payouts}} =
+        Tiger.Payout.list(client, headers: [{"stripe-account", "acct_1I8NJH2RzhYwutv7"}], query: [limit: 2, expand: []])
+
+      [%Payout{} = first | _] = payouts
+
+      assert first.id == "po_1IAkhi2RzhYwutv7NCX0A7Bq"
+      assert length(payouts) == 1
     end
   end
 end
